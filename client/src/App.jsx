@@ -14,17 +14,17 @@ const App = () => {
     }, []);
 
     const fetchTasks = async () => {
-        const res = await axios.get('http://localhost:5000/api/tasks');
+        const res = await axios.get('https://task-pedalstart.onrender.com/api/tasks');
         setTasks(res.data);
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (editingTask) {
-            await axios.put(`http://localhost:5000/api/tasks/${editingTask._id}`, { title, description, dueDate });
+            await axios.put(`https://task-pedalstart.onrender.com/api/tasks/${editingTask._id}`, { title, description, dueDate });
             setEditingTask(null);
         } else {
-            await axios.post('http://localhost:5000/api/tasks', { title, description, dueDate });
+            await axios.post('https://task-pedalstart.onrender.com/api/tasks', { title, description, dueDate });
         }
         setTitle('');
         setDescription('');
@@ -40,7 +40,7 @@ const App = () => {
     };
 
     const handleDelete = async (id) => {
-        await axios.delete(`http://localhost:5000/api/tasks/${id}`);
+        await axios.delete(`https://task-pedalstart.onrender.com/api/tasks/${id}`);
         fetchTasks();
     };
 
