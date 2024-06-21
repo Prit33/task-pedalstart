@@ -12,6 +12,7 @@ dotenv.config();
 app.use(cors());
 app.use(bodyParser.json());
 
+// connecting mongodb
 const connectDB = async () => {
   try {
     await mongoose.connect(process.env.MONGODB_URL);
@@ -20,6 +21,7 @@ const connectDB = async () => {
     console.log(err);
   }
 };
+// middleware to handle all the routes 
 app.use("/api/tasks", taskRoutes);
 
 

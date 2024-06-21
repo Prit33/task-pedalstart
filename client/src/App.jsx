@@ -13,11 +13,13 @@ const App = () => {
         fetchTasks();
     }, []);
 
+    // to get list of tasks
     const fetchTasks = async () => {
         const res = await axios.get('https://task-pedalstart.onrender.com/api/tasks');
         setTasks(res.data);
     };
 
+    // to edit or update the task 
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (editingTask) {
@@ -32,6 +34,7 @@ const App = () => {
         fetchTasks();
     };
 
+    // function to set EditingTask property
     const handleEdit = (task) => {
         setTitle(task.title);
         setDescription(task.description);
@@ -39,15 +42,18 @@ const App = () => {
         setEditingTask(task);
     };
 
+    // to delete task
     const handleDelete = async (id) => {
         await axios.delete(`https://task-pedalstart.onrender.com/api/tasks/${id}`);
         fetchTasks();
     };
 
+    // view function
     const handleView = (task) => {
         setViewingTask(task);
     };
 
+    // function to close the modal 
     const handleCloseModal = () => {
         setViewingTask(null);
     };
@@ -68,13 +74,13 @@ const App = () => {
                     <label className="block">Due Date</label>
                     <input type="date" value={dueDate} onChange={(e) => setDueDate(e.target.value)} className="w-full p-2 border rounded-md" />
                 </div>
-                {/* <button type="submit" className="p-2  bg-blue-500 text-white">{editingTask ? 'Update Task' : 'Add Task'}</button> */}
                 <div className="flex justify-center m-4">
                     <button type="submit" className="p-2 w-48 rounded-md border border-blue-500  hover:bg-blue-500 hover:text-white transition duration-200">
                     {editingTask ? 'Update Task' : 'Add Task'}
                     </button>
                 </div>
             </form>
+            
             <div>
                 {tasks.map((task) => (
                 <div key={task._id} className="m-2 p-4 h-36 w-64 inline-block rounded-xl border-2 border-slate-300 bg-slate-100">
